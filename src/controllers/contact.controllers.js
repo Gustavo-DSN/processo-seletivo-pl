@@ -1,19 +1,19 @@
 import Contact from "../models/Contact.models.js";
 
-export const listContacts = async (req, res) => {
+export const getAllContacts = async (req, res) => {
 	try {
 		const contacts = await Contact.findAll();
 
 		res.status(200).json(contacts);
 	} catch (error) {
 		res.status(500).json({
-			errorMessage: "Erro ao tentar listar contatos",
+			error: "Erro ao tentar listar contatos",
 			details: error.message,
 		});
 	}
 };
 
-export const createOneContact = async (req, res) => {
+export const createContact = async (req, res) => {
 	try {
 		const { name, phone } = req.body;
 
@@ -34,7 +34,7 @@ export const createOneContact = async (req, res) => {
 	}
 };
 
-export const updateOneContact = async (req, res) => {
+export const updateContactById = async (req, res) => {
 	try {
 		const contact = await Contact.findByPk(req.params.id);
 
@@ -52,7 +52,7 @@ export const updateOneContact = async (req, res) => {
 	}
 };
 
-export const removeOneContact = async (req, res) => {
+export const removeContactById = async (req, res) => {
 	try {
 		const contact = await Contact.findByPk(req.params.id);
 
@@ -61,7 +61,7 @@ export const removeOneContact = async (req, res) => {
 
 		await contact.destroy();
 
-		res.status(204).send("");
+		res.status(204).send();
 	} catch (error) {
 		res.status(400).json({
 			error: "Erro ao tentar remover um contato",
