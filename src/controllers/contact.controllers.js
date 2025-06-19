@@ -15,6 +15,14 @@ export const listContacts = async (req, res) => {
 
 export const createOneContact = async (req, res) => {
 	try {
+		const { name, phone } = req.body;
+
+		if (!name || !phone) {
+			return res.status(400).json({
+				error: "Nome e telefone são obrigatórios.",
+			});
+		}
+
 		const createdContact = await Contact.create(req.body);
 
 		res.status(201).json(createdContact);
