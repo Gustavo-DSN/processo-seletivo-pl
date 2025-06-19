@@ -1,10 +1,24 @@
 # Contacts API
 
-## ✅ O que você precisa para rodar
+## ✅ Requisitos para execução
 
--   Node.js (v18 ou superior) – https://nodejs.org
--   MySQL Server instalado e em execução
--   Git (opcional)
+Antes de começar, certifique-se de ter os seguintes softwares instalados no seu computador:
+
+-   [Node.js](https://nodejs.org) (v18 ou superior)
+-   [MySQL Server](https://dev.mysql.com/downloads/mysql/) instalado e em execução
+-   [Git](https://git-scm.com/) (opcional)
+
+### ⚠️ Instalando o MySQL
+
+Se você ainda **não tem o MySQL instalado**, siga os passos abaixo:
+
+1. Acesse o site oficial: [Download MySQL](https://dev.mysql.com/downloads/mysql/)
+2. Baixe o instalador compatível com seu sistema operacional (Windows, macOS ou Linux)
+3. Durante a instalação:
+    - Crie um usuário administrador (`root`) e defina uma senha
+    - Deixe o MySQL configurado para iniciar automaticamente com o sistema (recomendado)
+
+Após a instalação, o servidor MySQL precisa estar ativo sempre que você for rodar esta API.
 
 ---
 
@@ -23,11 +37,11 @@ cd processo-seletivo-portLouis
 npm install
 ```
 
-### 3. Crie o arquivo `.env`
+### 3. Configure o ambiente
 
-Na raiz do projeto, crie um arquivo chamado `.env` com o seguinte conteúdo:
+Crie um arquivo chamado `.env` na raiz do projeto com o seguinte conteúdo:
 
-```
+```env
 DB_HOST=localhost
 DB_USER=root
 DB_PASS=sua_senha_do_mysql
@@ -35,27 +49,29 @@ DB_NAME=contacts
 PORT=3000
 ```
 
-Substitua `sua_senha_do_mysql` pela senha do seu MySQL.
+**Atenção:** Substitua `sua_senha_do_mysql` pela senha definida durante a instalação do MySQL.
 
-### 4. Rode a aplicação
+---
+
+## 🛠 Conexão com o banco de dados
+
+-   O sistema se conecta automaticamente ao servidor MySQL usando as variáveis de ambiente.
+-   Se o banco `contacts` ainda não existir, ele será criado ao rodar a aplicação.
+-   Também será criada automaticamente a tabela `contacts` com os campos `name` e `phone`.
+
+---
+
+## ▶️ Executando a aplicação
 
 ```bash
 npm run dev
 ```
 
-Você verá algo como:
+Se estiver tudo certo, você verá no terminal:
 
 ```
 Servidor rodando na porta 3000
 ```
-
----
-
-## 🛠 O que o sistema faz
-
--   Cria automaticamente o banco de dados `contacts` se não existir.
--   Cria a tabela `contacts` com os campos `name` e `phone`.
--   Realiza todas as validações de entrada.
 
 ---
 
@@ -68,7 +84,7 @@ Servidor rodando na porta 3000
 | PATCH  | `/contacts/:id` | Atualiza um contato pelo ID |
 | DELETE | `/contacts/:id` | Remove um contato pelo ID   |
 
-### Exemplo de body para POST ou PATCH:
+### Exemplo de JSON para POST ou PATCH:
 
 ```json
 {
@@ -79,11 +95,9 @@ Servidor rodando na porta 3000
 
 ---
 
-## 🧪 Teste com Postman ou Insomnia
+## 🧪 Testando com Postman ou Insomnia
 
-Você pode testar os endpoints usando ferramentas como:
+Você pode testar os endpoints utilizando ferramentas como:
 
 -   [Postman](https://www.postman.com/)
 -   [Insomnia](https://insomnia.rest/)
-
----
